@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,9 +17,13 @@ import javax.persistence.*;
 public class Classroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer classroomId;
+    private Long classroomId;
     private String buildingName;
     private int roomNumber;
+
+    @OneToMany(mappedBy = "classroom", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Student> students;
+
 
     @Override
     public String toString() {

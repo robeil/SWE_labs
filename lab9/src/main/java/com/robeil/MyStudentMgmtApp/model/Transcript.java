@@ -1,6 +1,7 @@
 package com.robeil.MyStudentMgmtApp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,11 +16,16 @@ import javax.persistence.*;
 public class Transcript {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer transcriptId;
+    private Long transcriptId;
     private String degreeTitle;
 
-    @OneToOne(mappedBy = "transcript")
+    @OneToOne
     private Student student;
+
+    public Transcript(Long transcriptId, String degreeTitle) {
+        this.transcriptId = transcriptId;
+        this.degreeTitle = degreeTitle;
+    }
 
     @Override
     public String toString(){

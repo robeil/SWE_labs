@@ -1,5 +1,6 @@
 package com.robeil.MyStudentMgmtApp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,14 +35,22 @@ public class Student {
     private double cgpa;
     private LocalDate dateOfEnrollment;
 
-    @OneToOne
-    @JoinColumn(name = "transcript_id")
+    @OneToOne(mappedBy = "student")
     private Transcript transcript;
 
+    @ManyToOne
+    @JoinColumn
+    private Classroom classroom;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name= "student_id")
-    private List<Classroom> classrooms;
+    public Student(Long id, String studentNumber, String firstName, String middleName, String lastName, double cgpa, LocalDate dateOfEnrollment) {
+        this.id = id;
+        this.studentNumber = studentNumber;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.cgpa = cgpa;
+        this.dateOfEnrollment = dateOfEnrollment;
+    }
 
     @Override
     public String toString(){
