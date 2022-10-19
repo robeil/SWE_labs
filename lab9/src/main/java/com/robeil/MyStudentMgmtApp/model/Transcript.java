@@ -18,8 +18,7 @@ public class Transcript {
     private Integer transcriptId;
     private String degreeTitle;
 
-    @ManyToOne
-    @JsonBackReference
+    @OneToOne(mappedBy = "transcript")
     private Student student;
 
     @Override

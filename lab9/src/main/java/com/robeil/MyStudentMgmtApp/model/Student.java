@@ -34,13 +34,12 @@ public class Student {
     private double cgpa;
     private LocalDate dateOfEnrollment;
 
-    @JsonManagedReference
+    @OneToOne
+    @JoinColumn(name = "transcript_id")
+    private Transcript transcript;
+
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name= "student_id")
-    private List<Transcript> transcripts;
-
-
-    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name= "student_id")
     private List<Classroom> classrooms;
 
